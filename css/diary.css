@@ -1,0 +1,17 @@
+.mainBox {
+    display: flex;
+    border: 5px blue solid;
+}
+
+.mainBox div {
+    border: 5px red solid;
+    height: 100%;
+}
+
+.sideBox{
+    width: 20%;
+}
+
+.mapBox {
+    width: 60%;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arnie's Treasure Hunt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/map.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/568ba84139.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    <script src="/js/map.js" type="module"></script>
+    <script type="module">
+        import directoryTree from "../node_modules/directory-tree/lib/directory-tree.js"
+        const tree = dirTree("./DISCSITE");
+        console.log(tree)
+    </script>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+    
+    <script>
+        $(function(){
+        $("#nav-placeholder").load("/boilerplate/nav.html");
+        });
+    </script>
+
+    <header class = "mainBox">
+        <div class ="sideBox"></div>
+        <div class = "mapBox">
+            <div id="map"></div>
+        </div>
+        <div class = "sideBox"></div>
+    </header>
+
+    <footer>
+        <p>© 2024 Arnie's Treasure Hunt</p>
+    </footer>
+</body>
+
+</html>

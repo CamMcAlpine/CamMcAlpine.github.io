@@ -124,3 +124,12 @@ footer {
     height: 400px;
     width: 100%;
 }
+
+#secretbutton {
+    width: 20px;
+    height: 20px;
+}
+
+#secretbutton a{
+    color: var(--gray);
+}

@@ -28,9 +28,6 @@ body {
     flex-direction: column;
 }
 
-* {
-    box-sizing: inherit;
-}
 
 /* Header/Hero bar stuff */
 
@@ -40,7 +37,6 @@ header {
     margin: 0px;
     padding: 0px 0;
     text-align: center;
-    background-color: var(--tan);
 }
 
 .backgroundImage {

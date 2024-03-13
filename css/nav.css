@@ -3,7 +3,6 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-
 }
 
 li{
@@ -106,6 +105,7 @@ a{
         text-align: center;
         transition: 0.3s;
         margin: auto;
+        z-index: 9999;
     }
 
     .navitem{

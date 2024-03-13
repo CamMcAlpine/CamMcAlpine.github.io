@@ -18,34 +18,36 @@
 
 <div id="nav-placeholder"></div>
 
+<header>
+    <script>
+        $(function(){
+        $("#nav-placeholder").load("/boilerplate/nav.html");
+        });
+    </script>
 
+    <body>
 
-<body>
-    <header>
-        <script>
-            $(function(){
-            $("#nav-placeholder").load("/boilerplate/nav.html");
-            });
-        </script>
-    </header>
-    
-    <div class="backgroundImage"></div>
-    <div class="notBlurred"></div>
-    <div class="heroInfo">
-        <div class="heroText">
-            <h1>Happy Hunting!</h1>
+        
+        <div class="backgroundImage">
+            
         </div>
-        <div class="heroButton">
-            <a href="diary.html">Start Your Journey</a>
+        <div class="notBlurred"></div>
+        <div class="heroInfo">
+            <div class="heroText">
+                <h1>Happy Hunting!</h1>
+            </div>
+            <div class="heroButton">
+                <a href="diary.html">Start Your Journey</a>
+            </div>
         </div>
-    </div>
-    <div id="secretbutton">
-        <a href="diary.html">scrt</a>
-    </div>
 
-    <footer>
-        <p>© 2024 Arnie's Treasure Hunt</p>
-    </footer>
-</body>
+        <footer>
+            <div id="secretbutton">
+                <a href="diary.html">scrt</a>
+            </div>
+            <p>© 2024 Arnie's Treasure Hunt</p>
+        </footer>
+    </body>
 
+</header>
 </html>

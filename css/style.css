@@ -129,3 +129,32 @@ footer {
 #secretbutton a{
     color: var(--gray);
 }
+
+@media (max-width: 1350px) {
+    .backgroundImage{
+        background-size: 150%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .backgroundImage{
+        background-size: 200%;
+    }
+    .heroText{
+        display: none;
+    }
+    .heroInfo{
+        top: 60%;
+        left:50%;
+    }
+}
+
+@media(max-width:800px){
+    .backgroundImage{
+        background-size: 250%;
+    }
+}
+
+@media (max-width: 550px) {
+
+}

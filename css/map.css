@@ -1,6 +1,5 @@
 .mainBox {
     display: flex;
-    border: 5px blue solid;
 }
 
 .mainBox div {

@@ -113,7 +113,14 @@ footer {
     color: #f2f2f2;
     text-align: center;
     height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-block: 0;
+}
+
+footer p{
+    display: block;
 }
 
 #map {

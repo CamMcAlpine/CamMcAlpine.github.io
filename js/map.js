@@ -9,34 +9,53 @@ map.removeControl(map.zoomControl);
 
 var latlngs = [[]];
 var lines = 0;
+var markers = [];
 var markerNum = 0;
-var polyline = null;
+var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
 
 var popup = L.popup();
 
 function onMapClick(e) {
     var marker = L.marker(e.latlng, {draggable: true}).addTo(map);
+    map.addLayer(marker);
+    markers.push(marker);
     latlngs[lines].push(marker.getLatLng());
-    marker.on('move', updateLine);
-    markerNum = (markerNum + 1) % 2;
-    if(markerNum == 0){
-        lines++;
+    refresh();
+    if(markerNum % 2 == 1){
         latlngs.push([]);
     }
-    if (polyline) {
+    console.log(markerNum);
+    console.log(markers.length);
+}
+
+function refresh(){
+    if (map.hasLayer(polyline)){
         map.removeLayer(polyline);
     }
+    markerNum = markers.length;
+    lines = latlngs.length-1;
     polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
 }
 
-function updateLine() {
-    polyline.setLatLngs(latlngs);
+function onDrag(e)
+{
+
 }
 
 function onCPress(e)
 {
-    var key = e.key;
-    console.log(key);
+    var key = e.originalEvent.key;
+    if(key = 'c')
+    {
+        for(var i = 0; i < markers.length; i++)
+        {
+            map.removeLayer(markers[i]);
+        }
+        map.removeLayer(polyline);
+        latlngs = [[]];
+        markers = [];
+        refresh();
+    }
 }
 
 

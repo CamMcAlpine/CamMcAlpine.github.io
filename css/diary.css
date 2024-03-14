@@ -1,10 +1,8 @@
 .mainBox {
     display: flex;
-    border: 5px blue solid;
 }
 
 .mainBox div {
-    border: 5px red solid;
     height: 100%;
 }
 
@@ -14,4 +12,25 @@
 
 .mapBox {
     width: 60%;
+}
+
+@media (max-width: 1350px) {
+    
+}
+
+@media (max-width: 1000px) {
+
+}
+
+@media(max-width:850px){
+    .sideBox{
+        display: none;
+    }
+    .mapBox{
+        width: 100%;
+    }
+}
+
+@media (max-width: 550px) {
+
 }

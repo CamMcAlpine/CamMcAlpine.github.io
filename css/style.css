@@ -131,10 +131,13 @@ footer p{
 #secretbutton {
     width: 20px;
     height: 20px;
+    display: block;
+    margin-left:150px;
 }
 
 #secretbutton a{
     color: var(--gray);
+
 }
 
 @media (max-width: 1350px) {

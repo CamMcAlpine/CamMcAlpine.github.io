@@ -35,6 +35,7 @@ a{
 .nav-branding {
     margin-left: 10px;
     font-size: 2rem;
+    padding: 8px;
 }
 
 .nav-link{

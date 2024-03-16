@@ -18,6 +18,7 @@ var popup = L.popup();
 function onMapClick(e) {
     var marker = L.marker(e.latlng, {draggable: true}).addTo(map);
     map.addLayer(marker);
+    marker.on('drag', onDrag);
     markers.push(marker);
     latlngs[lines].push(marker.getLatLng());
     refresh();
@@ -39,7 +40,7 @@ function refresh(){
 
 function onDrag(e)
 {
-
+    console.log(L);
 }
 
 function onCPress(e)
@@ -60,4 +61,5 @@ function onCPress(e)
 
 
 map.on('click', onMapClick);
+
 map.on('keydown', onCPress)

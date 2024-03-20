@@ -40,6 +40,7 @@
         display: block;
         padding-block: 20px;
         padding-inline: 30px;
+        height: 100%;
     }
     .pdfBox{
         display: none;

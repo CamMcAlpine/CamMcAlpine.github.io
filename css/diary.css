@@ -13,6 +13,11 @@
 
 .mapBox {
     width: 60%;
+    height: 100%;
+}
+
+.mobile{
+    display: none;
 }
 
 @media (max-width: 1350px) {
@@ -29,7 +34,17 @@
     }
     .mapBox{
         width: 100%;
-        height: 90%;
+        height: 100%;
+    }
+    .mobile{
+        display: block;
+        height: 100%;
+        width: 100%;
+        padding-block: 20px;
+        padding-inline: 30px;
+    }
+    .pdf{
+        display: none;
     }
 }
 

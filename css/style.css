@@ -55,9 +55,9 @@ header {
 .heroText{
     font-family: Bebas;
     color: black;
-    letter-spacing: 8px;
+    letter-spacing: 4px;
     font-size: 1em;
-    margin: 5px;
+    margin: 0px;
     /* text-shadow: 5px 5px 5px black; */
     /* border: #67e4f5 1px solid; */
 }

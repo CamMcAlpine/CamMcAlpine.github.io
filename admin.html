@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wednesday Dubs</title>
+    <title>Admin Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/admin.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/568ba84139.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
@@ -14,14 +15,26 @@
 <body>
     <header>
             <div class="heroText">
-                <h1>Wednesday Dubs Team Generator</h1>
+                <h1>Admin Page</h1>
             </div>
-    </header>
 
-    <form>
-        <label for = "name">Enter Your Name</label><br>
-        <input type = "text" id = "name" name = "name">
-    </form>
+    </header>
+    
+    <!-- Contains player's names -->
+    <!-- This should resize dynamically -->
+    <div id = "players-box">
+        <li class = "players-list">
+            <ul>
+                <div class = "player-box">
+                    <h4 id = "player">
+                        Fred
+                    </h4>
+                </div>
+            </ul>
+        </li>
+
+    </div>
+
 </body>
 
 </html>

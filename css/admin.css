@@ -1,0 +1,11 @@
+.player-box{
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    margin: 0px;
+}
+
+#players-box {
+    border: 5px blue solid;
+    height: 80px;
+}

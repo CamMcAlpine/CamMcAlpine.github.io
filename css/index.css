@@ -7,9 +7,24 @@
 }
 
 .name_field {
-    border: 5px red solid;
-    justify-content: center;
-    align-items: center;
+    font-family: Bebas;
+    font-size: 1.4em;
+    font-style: bold;
+    text-align: center;
     padding: 5px;
     margin: 0px;
+}
+
+#name {
+    height: 40px;
+    width: 300px;
+}
+
+#name[type="text"]
+{
+    text-align: center;
+    padding-inline: 20px;
+    font-size: 1.2em;
+    font-family: Bebas;
+    color: var(--background);
 }

@@ -43,37 +43,3 @@ header {
     padding: 20px;
     text-align: center;
 }
-
-.heroText{
-    font-family: Bebas;
-    color: var(--text);
-    letter-spacing: 4px;
-    font-size: 1em;
-    margin: 0px;
-    /* text-shadow: 5px 5px 5px black; */
-    /* border: #67e4f5 1px solid; */
-}
-.heroText h1{
-    /* border: #f7f7f7 1px solid; */
-    margin: 0;
-}
-
-.heroButton a{
-    /* border: #67e4f5 1px solid; */
-    text-decoration: none;
-    font-family: Pirate;
-    font-size: 2em;
-    transition: background-color 0.2s ease-out;
-    padding: 3px 15px;
-
-}
-
-
-footer p{
-    display: block;
-}
-
-#map {
-    height: 400px;
-    width: 100%;
-}

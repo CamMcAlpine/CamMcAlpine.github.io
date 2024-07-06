@@ -1,11 +1,40 @@
-.player-box{
+#list-title {
+    font-family: Bebas;
     display: flex;
     justify-content: center;
-    padding: 0px;
     margin: 0px;
 }
 
-#players-box {
-    border: 5px blue solid;
-    height: 80px;
+header{
+    height: 10vh;
+}
+
+.button-box {
+    height: 40px;
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    margin-inline: 5px;
+    width: 100%;
+}
+
+#remove-player {
+    margin-left: 5px;
+}
+
+.players-list {
+    list-style-type: none;
+}
+
+.player-box{
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
 }

@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wednesday Dubs</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -12,13 +13,35 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
+
+<body>
+    <div class="container">
+        <form action="" id="nameForm">
+            <div class="alert">Your name has been added</div>
+
+            <div class="inputBox">
+                <input type="text" id="name" placeholder="Your name...." />
+            </div>
+
+            <div class="inputBox">
+                <button type="submit">Submit</button>
+=======
+
 <body>
     <header>
             <div class="title">
                 <h1>Wednesday Dubs Team Generator</h1>
             </div>
-    </header>
+        </form>
 
+        <div class="name-list">
+            <h3>Names in the database:</h3>
+            <ul id="names"></ul>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="./js/index.js"></script>
     <form class = "name_field">
         <label for = "name" id="name_tag">Enter Your Name</label><br>
         <input type = "text" id = "name" name = "name">

@@ -28,3 +28,11 @@
     font-family: Bebas;
     color: var(--background);
 }
+
+#submit {
+    margin-top: 10px;
+    background-color: var(--background);
+    font-family: Bebas;
+    font-size: .8em;
+    color: var(--text);
+}

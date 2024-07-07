@@ -97,7 +97,7 @@ button {
 
 #add {
     position: absolute;
-    right: 40px;
+    right: 10%;
     background-color: var(--background);
     font-family: Bebas;
     color: var(--text);

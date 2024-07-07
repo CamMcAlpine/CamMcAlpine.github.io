@@ -6,6 +6,7 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    position: fixed;
 }
 
 .name_field {

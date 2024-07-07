@@ -3,81 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arnie's Treasure Hunt</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/568ba84139.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <title>Names List | Firebase</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-    <header>
-        <div class="heroText">
-            <h1>Wednesday Dubs Team Generator</h1>
+    <div class="container">
+        <form action="" id="nameForm">
+            <div class="alert">Your name has been added</div>
+
+            <div class="inputBox">
+                <input type="text" id="name" placeholder="Your name...." />
+            </div>
+
+            <div class="inputBox">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+
+        <div class="name-list">
+            <h3>Names in the database:</h3>
+            <ul id="names"></ul>
         </div>
-    </header>
+    </div>
 
-    <form id="nameForm">
-        <label for="name">Enter Your Name</label><br>
-        <input type="text" id="name" name="name">
-        <button type="submit">Submit</button>
-    </form>
-
-    <ul id="namesList"></ul>
-
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-    <script>
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyB3hFS_T2wtfV-ZR57u3PIa5BzgX_3Pgsw",
-            authDomain: "wednesday-dubs.firebaseapp.com",
-            projectId: "wednesday-dubs",
-            storageBucket: "wednesday-dubs.appspot.com",
-            messagingSenderId: "1048374787195",
-            appId: "1:1048374787195:web:dc97776e4005d4e7fa76de",
-            measurementId: "G-7P46FJTMD1"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        console.log('Firebase initialized:', firebase.app().name); // Logging to verify initialization
-
-        // Function to fetch and display names
-        async function fetchAndDisplayNames() {
-            try {
-                const snapshot = await db.collection('names').get();
-                const names = snapshot.docs.map(doc => doc.data().name);
-                const namesList = document.getElementById('namesList');
-                namesList.innerHTML = names.map(name => `<li>${name}</li>`).join('');
-            } catch (error) {
-                console.error('Error fetching names: ', error);
-            }
-        }
-
-        // Fetch and display names on page load
-        window.onload = fetchAndDisplayNames;
-
-        document.getElementById('nameForm').addEventListener('submit', async function (event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value;
-            if (name) {
-                try {
-                    // Add name to Firestore
-                    await db.collection('names').add({ name });
-                    alert('Name added successfully');
-                    document.getElementById('name').value = '';
-                    // Refresh the list of names
-                    fetchAndDisplayNames();
-                } catch (error) {
-                    console.error('Error adding name: ', error);
-                }
-            }
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="./js/index.js"></script>
 </body>
 
 </html>

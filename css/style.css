@@ -18,12 +18,11 @@ body {
     min-height: 100vh;
 }
 
-
 /* Header/Hero bar stuff */
 
 header {
     font-family: Bebas;
-    letter-spacing: 2px;;
+    letter-spacing: 2px;
     font-size: 1.25em;
     position: relative;
     width: 100%;

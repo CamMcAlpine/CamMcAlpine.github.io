@@ -28,13 +28,8 @@ header {
     position: relative;
     width: 100%;
     height: 20vh;
-<<<<<<< Updated upstream
     margin: 20px;
     padding: 0px 0;
-=======
-    margin: 0px;
-    padding: 0px 0px;
->>>>>>> Stashed changes
     text-align: center;
     display: flex;
     flex-direction: column;

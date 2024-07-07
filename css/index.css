@@ -1,0 +1,52 @@
+.title {
+    width: 300px;
+    height: 20vh;
+    font-family: Bebas;
+    font-size: 1.0;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    position: fixed;
+}
+
+.name_field {
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Bebas;
+    font-size: 1.4em;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#name_tag {
+    margin: 0;
+    font-family: Bebas;
+    font-size: 1.2em;
+}
+
+#name {
+    margin: 0;
+    height: 40px;
+    width: 300px;
+}
+
+#name[type="text"]
+{
+    text-align: center;
+    padding-inline: 20px;
+    font-size: 1.2em;
+    font-family: Bebas;
+    color: var(--background);
+}
+
+#submit {
+    margin-top: 10px;
+    background-color: var(--background);
+    font-family: Bebas;
+    font-size: .8em;
+    color: var(--text);
+}

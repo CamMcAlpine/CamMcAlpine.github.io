@@ -1,16 +1,6 @@
 :root {
-    --gray: #333;
-    --navyBlue: #101535f6;
-    --brown:  #c9a053;
-    --gold: rgb(182, 179, 0);
-    --lightBrown: #ffdfae;
-    --blue: rgb(94,179,216);
-    --umassdblue: rgb(0,174,221);
-    --umassddarkblue: rgb(0,55,100);
-    --umassdgold: rgb(255,185,21);
-    --darkblue: rgb(81, 155, 186);
-    --yellow: rgb(207, 196, 44);
-    --tan: rgba(180, 208, 219, 0.877);
+    --text: rgba(180, 208, 219, 0.877);
+    --background: #232323
 }
 @font-face {
     font-family: "Bebas";
@@ -20,6 +10,8 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
+    background-color: var(--background);
+    color: var(--text);
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -30,10 +22,14 @@ body {
 /* Header/Hero bar stuff */
 
 header {
+    font-family: Bebas;
+    letter-spacing: 2px;;
+    font-size: 1.25em;
     position: relative;
+    width: 100%;
     height: 20vh;
     margin: 0px;
-    padding: 0px 0;
+    padding: 0px 0px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -50,51 +46,4 @@ header {
     width: 80%;
     padding: 20px;
     text-align: center;
-}
-
-.heroText{
-    font-family: Bebas;
-    color: black;
-    letter-spacing: 8px;
-    font-size: 1em;
-    margin: 5px;
-    /* text-shadow: 5px 5px 5px black; */
-    /* border: #67e4f5 1px solid; */
-}
-.heroText h1{
-    /* border: #f7f7f7 1px solid; */
-    margin: 0;
-}
-
-.heroButton a{
-    /* border: #67e4f5 1px solid; */
-    color: black;
-    text-decoration: none;
-    font-family: Pirate;
-    font-size: 2em;
-    transition: background-color 0.2s ease-out;
-    padding: 3px 15px;
-
-}
-
-
-footer p{
-    display: block;
-}
-
-#map {
-    height: 400px;
-    width: 100%;
-}
-
-#secretbutton {
-    width: 20px;
-    height: 20px;
-    display: block;
-    margin-left:150px;
-}
-
-#secretbutton a{
-    color: var(--gray);
-
 }

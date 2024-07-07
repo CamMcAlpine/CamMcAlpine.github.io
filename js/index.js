@@ -10,37 +10,32 @@ const firebaseConfig = {
     measurementId: "G-7P46FJTMD1"
 };
 
-// initialize firebase
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// reference your database
+// Reference your database
 var nameFormDB = firebase.database().ref("nameForm");
+
+// Generate or retrieve a device ID
+let deviceId = localStorage.getItem('deviceId');
+if (!deviceId) {
+    deviceId = 'device-' + Math.random().toString(36).substr(2, 16);
+    localStorage.setItem('deviceId', deviceId);
+}
 
 document.getElementById("nameForm").addEventListener("submit", submitForm);
 
 function submitForm(e) {
     e.preventDefault();
-
-    var name = getElementVal("name");
-
-    saveName(name);
-
-    // enable alert
-    document.querySelector(".alert").style.display = "block";
-
-    // remove the alert
-    setTimeout(() => {
-        document.querySelector(".alert").style.display = "none";
-    }, 3000);
-
-    // reset the form
-    document.getElementById("nameForm").reset();
+    const name = getElementVal("name");
+    saveName(deviceId, name);
+    window.location.href = "list.html";
 }
 
-const saveName = (name) => {
+const saveName = (deviceId, name) => {
     var newNameForm = nameFormDB.push();
-
     newNameForm.set({
+        deviceId: deviceId,
         name: name,
     });
 };
@@ -48,16 +43,3 @@ const saveName = (name) => {
 const getElementVal = (id) => {
     return document.getElementById(id).value;
 };
-
-// Fetching the names from the database and displaying them
-nameFormDB.on("value", (snapshot) => {
-    const namesList = document.getElementById("names");
-    namesList.innerHTML = ""; // Clear the list before updating
-
-    snapshot.forEach((childSnapshot) => {
-        const childData = childSnapshot.val();
-        const li = document.createElement("li");
-        li.textContent = childData.name;
-        namesList.appendChild(li);
-    });
-});

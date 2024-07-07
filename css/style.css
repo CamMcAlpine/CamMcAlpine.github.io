@@ -9,7 +9,8 @@
 
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: Bebas;
+    letter-spacing: 2px;
     background-color: var(--background);
     color: var(--text);
     padding: 0;

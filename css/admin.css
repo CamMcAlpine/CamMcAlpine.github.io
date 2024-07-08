@@ -38,6 +38,7 @@ button {
     display: flex;
     justify-content: center;
     margin: 0px;
+    margin-top: 20px;
     font-size: 1.7em;
 }
 
@@ -64,4 +65,40 @@ button {
 
 .gen-teams-button {
     height: 100%;
+}
+
+/* Delete Icon */
+.material-symbols-outlined {
+    right: 10%;
+    position: absolute;
+    cursor: pointer;
+}
+
+.add_player_box {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.name_field {
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    align-items: center;
+    justify-content: center;
+}
+
+#name {
+    width: 100%;
+}
+
+#add {
+    position: absolute;
+    right: 10%;
+    background-color: var(--background);
+    font-family: Bebas;
+    color: var(--text);
 }

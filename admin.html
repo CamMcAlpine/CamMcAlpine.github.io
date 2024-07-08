@@ -6,7 +6,8 @@
     <title>Wednesday Dubs Team Generator - Admin</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/index.css" rel="stylesheet">
+    <link href="/css/admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://kit.fontawesome.com/568ba84139.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
@@ -16,8 +17,40 @@
             <h1>Wednesday Dubs Team Generator - Admin</h1>
         </div>
     </header>
+
     <div class="container">
         <button id="pair">Pair Names</button>
+    </div>
+    <h2 id = "list-title">Player List</h2>
+
+    <div class = "list-box">
+        <li class = "players-list">
+            <ul class = "player-box">
+                <h4 id = "player">
+                    Fred
+                </h4>
+                <div class="material-symbols-outlined">
+                    delete
+                </div>
+            </ul>
+            <ul class = "player-box">
+                <h4 id = "player">
+                    Billy
+                </h4>
+                <div class="material-symbols-outlined">
+                    delete
+                </div>
+            </ul>
+            <div class = "add_player_box">
+                <form class = "name_field">
+                        <input type = "text" id = "name" name = "name">
+                </form>
+                <input type = "submit" id = "add" value = "Add" for="name">
+            </div>
+        </li>
+    </div>
+    <div class = "gen-teams-button-box">
+        <button class = "gen-teams-button">Generate Teams</button>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
     <script src="./js/admin.js"></script>

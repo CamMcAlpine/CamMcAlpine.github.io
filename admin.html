@@ -16,6 +16,36 @@
             <h1>Wednesday Dubs Team Generator - Admin</h1>
         </div>
     </header>
+    <h2 id = "list-title">Player List</h2>
+
+    <div class = "list-box">
+        <li class = "players-list">
+            <ul class = "player-box">
+                <h4 id = "player">
+                    Bob
+                </h4>
+                <div class="material-symbols-outlined">
+                    delete
+                </div>
+            </ul>
+            <ul class = "player-box">
+                <h4 id = "player">
+                    Billy
+                </h4>
+                <div class="material-symbols-outlined">
+                    delete
+                </div>
+            </ul>
+            <div class = "add_player_box">
+                <form class = "name_field">
+                        <input type = "text" id = "name" name = "name">
+                </form>
+                <input type = "submit" id = "add" value = "Add" for="name">
+            </div>
+        </li>
+    </div>
+    <div class = "gen-teams-button-box">
+        <button id = "pair" class = "gen-teams-button">Generate Teams</button>
     <div class="container">
         <label for="playersPerTeam">Players per Team:</label>
         <input type="number" id="playersPerTeam" min="1" value="2">

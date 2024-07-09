@@ -19,6 +19,9 @@ var nameFormDB = firebase.database().ref("nameForm");
 document.getElementById("pair").addEventListener("click", pairNames);
 
 function pairNames() {
+    const playersPerTeam = parseInt(document.getElementById("playersPerTeam").value);
+    const teamsPerCard = parseInt(document.getElementById("teamsPerCard").value);
+
     nameFormDB.once("value", (snapshot) => {
         const namesArray = [];
         snapshot.forEach((childSnapshot) => {
@@ -29,16 +32,27 @@ function pairNames() {
             });
         });
 
-        // Shuffle names and pair them
+        // Shuffle names
         shuffleArray(namesArray);
 
-        for (let i = 0; i < namesArray.length; i += 2) {
-            if (i + 1 < namesArray.length) {
-                nameFormDB.child(namesArray[i].key).update({ partnerId: namesArray[i + 1].deviceId });
-                nameFormDB.child(namesArray[i + 1].key).update({ partnerId: namesArray[i].deviceId });
-            } else {
-                nameFormDB.child(namesArray[i].key).update({ partnerId: "none" });
-            }
+        const teams = [];
+        while (namesArray.length > 0) {
+            const team = namesArray.splice(0, playersPerTeam);
+            const teamId = firebase.database().ref().child('teams').push().key;
+            team.forEach(player => {
+                nameFormDB.child(player.key).update({ teamId: teamId });
+            });
+            teams.push(teamId);
+        }
+
+        const cards = [];
+        while (teams.length > 0) {
+            const card = teams.splice(0, teamsPerCard);
+            const cardId = firebase.database().ref().child('cards').push().key;
+            card.forEach(teamId => {
+                firebase.database().ref('teams/' + teamId).update({ cardId: cardId });
+            });
+            cards.push(cardId);
         }
 
         // Redirect users to pairing page

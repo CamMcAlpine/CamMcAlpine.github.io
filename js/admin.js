@@ -1,22 +1,28 @@
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-    apiKey: "AIzaSyB3hFS_T2wtfV-ZR57u3PIa5BzgX_3Pgsw",
-    authDomain: "wednesday-dubs.firebaseapp.com",
-    databaseURL: "https://wednesday-dubs-default-rtdb.firebaseio.com",
-    projectId: "wednesday-dubs",
-    storageBucket: "wednesday-dubs.appspot.com",
-    messagingSenderId: "1048374787195",
-    appId: "1:1048374787195:web:dc97776e4005d4e7fa76de",
-    measurementId: "G-7P46FJTMD1"
-};
+// const firebaseConfig = {
+//     apiKey: "AIzaSyB3hFS_T2wtfV-ZR57u3PIa5BzgX_3Pgsw",
+//     authDomain: "wednesday-dubs.firebaseapp.com",
+//     databaseURL: "https://wednesday-dubs-default-rtdb.firebaseio.com",
+//     projectId: "wednesday-dubs",
+//     storageBucket: "wednesday-dubs.appspot.com",
+//     messagingSenderId: "1048374787195",
+//     appId: "1:1048374787195:web:dc97776e4005d4e7fa76de",
+//     measurementId: "G-7P46FJTMD1"
+// };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// // Initialize Firebase
+// firebase.initializeApp(firebaseConfig);
+
+/*
+We dont need the above part if we are using 
+both <script src="./js/list.js"></script> and 
+<script src="./js/admin.js"></script> in our admin.html file
+*/
 
 // Reference your database
 var nameFormDB = firebase.database().ref("nameForm");
 
-document.getElementById("pair").addEventListener("click", pairNames);
+document.getElementById("generate-teams").addEventListener("click", pairNames);
 
 function pairNames() {
     const playersPerTeam = parseInt(document.getElementById("playersPerTeam").value);
@@ -55,10 +61,14 @@ function pairNames() {
             cards.push(cardId);
         }
 
-        // Redirect users to pairing page
-        setTimeout(() => {
-            window.location.href = "pair.html";
-        }, 1000);
+        // Update the isTeamsGenerated flag to true
+        const isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");
+        isTeamsGeneratedRef.set(true);
+
+        // // Redirect users to pairing page
+        // setTimeout(() => {
+        //     window.location.href = "pair.html";
+        // }, 1000);
     });
 }
 
@@ -68,3 +78,43 @@ function shuffleArray(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
+
+document.getElementById("clear-data").addEventListener("click", clearDatabaseConfirm);
+
+function clearDatabaseConfirm() {
+    const confirmation = confirm("Are you sure you want to clear all data from the database? This action cannot be undone.");
+    if (confirmation) {
+        clearDatabase();
+    }
+}
+
+function clearDatabase() {
+    // Reference your database
+    var database = firebase.database();
+
+    // Delete all data at the "nameForm" node (clears everything under nameForm)
+    database.ref("nameForm").remove().then(() => {
+        console.log("Name Form cleared successfully!");
+    }).catch((error) => {
+        console.error("Error clearing Name Form:", error);
+    });
+
+    // Delete all data at the "teams" node (clears everything under teams)
+    database.ref("teams").remove().then(() => {
+        console.log("Teams cleared successfully!");
+    }).catch((error) => {
+        console.error("Error clearing Teams:", error);
+    });
+
+    // Delete all data at the "cards" node (clears everything under cards)
+    database.ref("cards").remove().then(() => {
+        console.log("Cards cleared successfully!");
+    }).catch((error) => {
+        console.error("Error clearing Cards:", error);
+    });
+
+    // Reset the isTeamsGenerated flag to false
+    var isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");
+    isTeamsGeneratedRef.set(false);
+}
+

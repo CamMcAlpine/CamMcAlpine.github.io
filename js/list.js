@@ -27,3 +27,17 @@ nameFormDB.on("value", (snapshot) => {
         namesList.appendChild(li);
     });
 });
+
+var isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");
+
+// Function to check for team generation flag and redirect
+isTeamsGeneratedRef.on("value", (snapshot) => {
+    const isGenerated = snapshot.val();
+    if (isGenerated) {
+        window.location.href = "pair.html";
+    }
+});
+
+// Call fetchNames on page load
+// fetchNames();
+

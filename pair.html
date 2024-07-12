@@ -1,41 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wednesday Dubs Team Generator</title>
+    <title>Wednesday Dubs Team Generator - Pairing</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/568ba84139.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
-
 <body>
     <header>
         <div class="title">
-            <h1>Wednesday Dubs Team Generator</h1>
+            <h1>Wednesday Dubs Team Generator - Your Pairing</h1>
         </div>
     </header>
-
     <div class="container">
-        <form action="" id="nameForm">
-            <div class="alert" style="display: none;">Your name has been added</div>
-
-            <div class="inputBox">
-                <input type="text" id="name" placeholder="Your name...." />
-            </div>
-
-            <div class="inputBox">
-                <button type="submit" id="submit">Submit</button>
-            </div>
-        </form>
+        <div class="pairing">
+            <h3>Your Team:</h3>
+            <div id="team"></div>
+            <h3>Your Card:</h3>
+            <div id="opponents"></div>
+        </div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
-    <script src="./js/index.js"></script>
+    <script src="./js/pair.js"></script>
 </body>
-
 </html>

@@ -7,6 +7,13 @@
 
 li {
   list-style: none;
+  background-color: rgb(66, 66, 66);
+  padding-block: 5px;
+}
+
+#list-title {
+  display: flex;
+  justify-content: center;
 }
 
 .title {
@@ -41,8 +48,18 @@ li {
 }
 
 .gen-teams-button {
+  background-color: var(--text);
+  font-family: Bebas;
+  font-size: 2em;
+  letter-spacing: 1px;;
   height: 100%;
+  width: 100%;
 }
+
+/*  Backend Stuff - Cleanup in Fixing-Git
+ .generate-teams {
+  height: 100%;
+} */
 
 /* Delete Icon */
 .material-symbols-outlined {

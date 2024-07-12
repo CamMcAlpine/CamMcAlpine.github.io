@@ -23,6 +23,32 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0px;
+    margin: 3px;
+}
+
+
+.gen-teams-button-box {
+    position: fixed;
+    bottom: 30px;
+    width: 100%;
+    height: 60px;
+}
+
+.gen-teams-button {
+    height: 100%;
+}
+
+/* Delete Icon */
+.material-symbols-outlined {
+    right: 10%;
+    position: absolute;
+    cursor: pointer;
+}
+
+.add_player_box {
+    padding: 0px;
+    margin: 0px;
   }
   
   .player-list-container {
@@ -55,8 +81,10 @@ header {
     background-color: var(--text);
     color: var(--background);
     font-family: Bebas;
+    color: var(--text);
     font-size: 1.5em;
     margin: 0 auto;
     padding: 10px 20px;
     border: none;
   }  
+

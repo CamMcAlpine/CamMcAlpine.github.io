@@ -5,15 +5,25 @@
   background-color: var(--background);
 } */
 
-li {
-  list-style: none;
+.list-box {
   background-color: rgb(66, 66, 66);
-  padding-block: 5px;
+  padding-bottom: 10px;
+}
+
+li {
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 10px 0px 10px 0;
+  margin: 0px;
 }
 
 #list-title {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .title {
@@ -27,7 +37,6 @@ li {
 }
 
 .player-box{
-  color: rgb(63, 146, 182);
   font-family: Bebas;
   font-size: 1.3em;
   font-style: normal;
@@ -36,8 +45,9 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px;
-  margin: 3px;
+  padding-block: 3px;
+  margin: 0px;
+  width: 100%;
 }
 
 .gen-teams-button-box {

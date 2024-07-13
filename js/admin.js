@@ -22,11 +22,11 @@ both <script src="./js/list.js"></script> and
 // Reference your database
 var nameFormDB = firebase.database().ref("nameForm");
 
-document.getElementById("generate-teams").addEventListener("click", pairNames);
+document.getElementById("gen-teams-button").addEventListener("click", pairNames);
 
 function pairNames() {
-    const playersPerTeam = parseInt(document.getElementById("playersPerTeam").value);
-    const teamsPerCard = parseInt(document.getElementById("teamsPerCard").value);
+    const playersPerTeam = 2;
+    const teamsPerCard = 2;
 
     nameFormDB.once("value", (snapshot) => {
         const namesArray = [];
@@ -79,7 +79,7 @@ function shuffleArray(array) {
     }
 }
 
-document.getElementById("clear-data").addEventListener("click", clearDatabaseConfirm);
+// document.getElementById("clear-data").addEventListener("click", clearDatabaseConfirm);
 
 function clearDatabaseConfirm() {
     const confirmation = confirm("Are you sure you want to clear all data from the database? This action cannot be undone.");

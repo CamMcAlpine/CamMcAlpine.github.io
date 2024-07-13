@@ -47,7 +47,7 @@ li {
   height: 60px;
 }
 
-.gen-teams-button {
+#gen-teams-button {
   background-color: var(--text);
   font-family: Bebas;
   font-size: 2em;

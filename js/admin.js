@@ -28,6 +28,7 @@ nameFormDB.on("value", (snapshot) => {
     playersList.innerHTML = ""; // Clear the list before updating
     snapshot.forEach((childSnapshot) => {
         const name = childSnapshot.val().name;
+
         // Create player Box
         const playerBox = document.createElement("li");
         playerBox.classList.add("player-box");
@@ -51,6 +52,24 @@ nameFormDB.on("value", (snapshot) => {
 });
 
 document.getElementById("gen-teams-button").addEventListener("click", pairNames);
+document.getElementById("name_field").addEventListener("submit", submitForm);
+
+function submitForm(e) {
+    name_field = document.getElementById("name");
+    e.preventDefault();
+    let name = name_field.value;
+    name_field.value = " ";
+    saveName(0, name);
+}
+
+const saveName = (deviceId, name) => {
+    // Generate or retrieve a device ID
+    var newNameForm = nameFormDB.push();
+    newNameForm.set({
+        deviceId: deviceId,
+        name: name,
+    });
+};
 
 function pairNames() {
     const playersPerTeam = 2;
@@ -150,4 +169,3 @@ function clearDatabase() {
     var isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");
     isTeamsGeneratedRef.set(false);
 }
-

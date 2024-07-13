@@ -87,7 +87,7 @@ ul {
   align-items: center;
 }
 
-.name_field {
+#name_field {
   display: flex;
   padding: 0px;
   margin: 0px;
@@ -96,7 +96,17 @@ ul {
 }
 
 #name {
+  letter-spacing: 1px;
   width: 100%;
+}
+
+#name[type="text"]
+{
+    text-align: center;
+    padding-inline: 20px;
+    font-size: 1em;
+    font-family: Bebas;
+    color: var(--background);
 }
 
 #add {

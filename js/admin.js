@@ -22,6 +22,34 @@ both <script src="./js/list.js"></script> and
 // Reference your database
 var nameFormDB = firebase.database().ref("nameForm");
 
+// Fetch and display names in real-time
+nameFormDB.on("value", (snapshot) => {
+    const playersList = document.getElementById("players-list");
+    playersList.innerHTML = ""; // Clear the list before updating
+    snapshot.forEach((childSnapshot) => {
+        const name = childSnapshot.val().name;
+        // Create player Box
+        const playerBox = document.createElement("li");
+        playerBox.classList.add("player-box");
+        playersList.appendChild(playerBox);
+
+        // Create player name
+        const playerName = document.createElement("h4");
+        playerName.classList.add("player");
+        playerName.textContent = name;
+        playerBox.appendChild(playerName);
+
+        // Add Trash Can Icon
+        const deleteIcon = document.createElement("div");
+        deleteIcon.classList.add("material-symbols-outlined");
+        deleteIcon.textContent = "delete";
+        playerBox.appendChild(deleteIcon);
+        deleteIcon.addEventListener("click", () => {
+            nameFormDB.child(childSnapshot.key).remove();
+        });
+    });
+});
+
 document.getElementById("gen-teams-button").addEventListener("click", pairNames);
 
 function pairNames() {

@@ -18,14 +18,16 @@ var nameFormDB = firebase.database().ref("nameForm");
 
 // Fetch and display names in real-time
 nameFormDB.on("value", (snapshot) => {
-    const namesList = document.getElementById("names");
-    namesList.innerHTML = ""; // Clear the list before updating
-    snapshot.forEach((childSnapshot) => {
-        const name = childSnapshot.val().name;
-        const li = document.createElement("li");
-        li.textContent = name;
-        namesList.appendChild(li);
-    });
+        const namesList = document.getElementById("names");
+        if(namesList == null)
+            return;
+        namesList.innerHTML = ""; // Clear the list before updating
+        snapshot.forEach((childSnapshot) => {
+            const name = childSnapshot.val().name;
+            const li = document.createElement("li");
+            li.textContent = name;
+            namesList.appendChild(li);
+        });
 });
 
 var isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");

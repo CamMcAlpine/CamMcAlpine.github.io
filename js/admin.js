@@ -38,6 +38,11 @@ function pairNames() {
             });
         });
 
+        if(namesArray.length < 2) {
+            alert("Not enough players. Please add more players.");
+            return;
+        }
+        
         // Shuffle names
         shuffleArray(namesArray);
 

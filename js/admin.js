@@ -54,22 +54,48 @@ nameFormDB.on("value", (snapshot) => {
 document.getElementById("gen-teams-button").addEventListener("click", pairNames);
 document.getElementById("name_field").addEventListener("submit", submitForm);
 
+
+
 function submitForm(e) {
+    playerID = getPlayerID();
     name_field = document.getElementById("name");
     e.preventDefault();
     let name = name_field.value;
     name_field.value = " ";
-    saveName(0, name);
+    saveName(playerID, 0, name);
 }
 
-const saveName = (deviceId, name) => {
+const saveName = (playerID, deviceId, name) => {
     // Generate or retrieve a device ID
     var newNameForm = nameFormDB.push();
     newNameForm.set({
         deviceId: deviceId,
         name: name,
+        playerID: playerID
     });
 };
+
+function getPlayerID() {
+    playerID = 1;
+    // Find Number of Entries in Name field of DB
+    nameFormDB.once("value", (snapshot) => {
+        length = snapshot.numChildren();
+        const namesArray = [];
+        snapshot.forEach((childSnapshot) => {
+            namesArray.push({
+                key: childSnapshot.key,
+                deviceId: childSnapshot.val().deviceId,
+                name: childSnapshot.val().name,
+                playerID: childSnapshot.val().playerID
+            });
+        });
+        console.log(namesArray);
+        if(length > 0){
+            playerID = namesArray[length-1].playerID + 1;
+        }
+    });
+    return playerID;
+}
 
 function pairNames() {
     const playersPerTeam = 2;

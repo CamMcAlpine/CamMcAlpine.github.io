@@ -27,18 +27,43 @@ document.getElementById("nameForm").addEventListener("submit", submitForm);
 
 function submitForm(e) {
     e.preventDefault();
+    var id = getPlayerID();
+    console.log(id);
     const name = getElementVal("name");
-    saveName(deviceId, name);
-    window.location.href = "list.html";
+    saveName(id, deviceId, name);
+    // window.location.href = "list.html";
 }
 
-const saveName = (deviceId, name) => {
+const saveName = (playerID, deviceId, name) => {
     var newNameForm = nameFormDB.push();
     newNameForm.set({
         deviceId: deviceId,
         name: name,
+        playerID: playerID
     });
 };
+
+function getPlayerID() {
+    playerID = 1;
+    // Find Number of Entries in Name field of DB
+    nameFormDB.once("value", (snapshot) => {
+        length = snapshot.numChildren();
+        const namesArray = [];
+        snapshot.forEach((childSnapshot) => {
+            namesArray.push({
+                key: childSnapshot.key,
+                deviceId: childSnapshot.val().deviceId,
+                name: childSnapshot.val().name,
+                playerID: childSnapshot.val().playerID
+            });
+        });
+        if(length > 0){
+            playerID = namesArray[length-1].playerID + 1;
+            console.log(playerID);
+        }
+    });
+    return playerID;
+}
 
 const getElementVal = (id) => {
     return document.getElementById(id).value;

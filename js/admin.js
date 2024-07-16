@@ -125,7 +125,6 @@ function pairNames() {
             if(newArray.length < 4) {
                 playersPerCard = newArray.length;
                 
-                console.log(playersPerCard);
                 //Add on prev card
                 if(playersPerCard <= 2) {
                     if(prevCard != "") {

@@ -21,6 +21,7 @@ both <script src="./js/list.js"></script> and
 
 // Reference your database
 var nameFormDB = firebase.database().ref("nameForm");
+var cardFormDB = firebase.database().ref("cardForm");
 
 // Fetch and display names in real-time
 nameFormDB.on("value", (snapshot) => {
@@ -90,28 +91,75 @@ function pairNames() {
             return;
         }
         
+
         // Shuffle names
-        shuffleArray(namesArray);
+        shuffledNames = shuffleArray(namesArray);
 
-        const teams = [];
-        while (namesArray.length > 0) {
-            const team = namesArray.splice(0, playersPerTeam);
-            const teamId = firebase.database().ref().child('teams').push().key;
-            team.forEach(player => {
-                nameFormDB.child(player.key).update({ teamId: teamId });
-            });
-            teams.push(teamId);
+        // Load Teams
+        for (i = 0; i < namesArray.length; i += playersPerTeam) {
+
+            // If odd number of people, one person is Cali
+            if(i == namesArray.length - 1) {
+                player1Key = namesArray[i].key;
+                nameFormDB.child(player1Key).update({ partnerID: player1Key });
+                break;                
+            }
+            player1Key = namesArray[i].key;
+            player2Key = namesArray[i + 1].key;
+
+            // Put partner ID in player name form
+            nameFormDB.child(player1Key).update({ partnerID: player2Key });
+            nameFormDB.child(player2Key).update({ partnerID: player1Key });
         }
 
-        const cards = [];
-        while (teams.length > 0) {
-            const card = teams.splice(0, teamsPerCard);
-            const cardId = firebase.database().ref().child('cards').push().key;
-            card.forEach(teamId => {
-                firebase.database().ref('teams/' + teamId).update({ cardId: cardId });
-            });
-            cards.push(cardId);
+        // Load Cards
+        var prevCard = "";
+        lengthOfArray = namesArray.length;
+
+
+        for (i = 0; i < lengthOfArray; i += 4) {
+            newArray = namesArray.splice(0, 4);
+            playersPerCard = 4;
+            console.log(newArray[0].key);
+
+            if(newArray.length < 4) {
+                playersPerCard = newArray.length;
+                
+                console.log(playersPerCard);
+                //Add on prev card
+                if(playersPerCard <= 2) {
+                    if(prevCard != "") {
+                        for (j = 0; j < playersPerCard; j++) {
+                            playerKey = newArray[j].key;
+
+                            cardFormDB.child(prevCard).update({ ['Player ' + (j+5)]: playerKey });
+                        }
+                        cardFormDB.child(prevCard).update({ hole : 2 });
+                        break;   
+                    }
+                }         
+            }
+
+            var newCardForm = cardFormDB.push()
+            newCardForm.set({ hole : 1 });
+            prevCard = newCardForm.key;
+
+            for(j = 0; j < playersPerCard; j++) {                
+                playerKey = newArray[j].key;
+                console.log(playerKey);
+                cardFormDB.child(prevCard).update({ ['Player ' + (j+1)]: playerKey });
+            }
         }
+// xxxxxxxxxxxxxxxxxxxxxxxx
+        // while (teams.length > 0) {
+        //     const card = teams.splice(0, teamsPerCard);
+        //     const cardId = firebase.database().ref().child('cards').push().key;
+        //     card.forEach(teamId => {
+        //         firebase.database().ref('teams/' + teamId).update({ cardId: cardId });
+        //     });
+        //     cards.push(cardId);
+        // }
+// xxxxxxxxxxxxxxxxxxxxxxxx
 
         // Update the isTeamsGenerated flag to true
         const isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");

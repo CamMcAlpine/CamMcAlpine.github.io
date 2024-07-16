@@ -44,7 +44,7 @@ const saveName = (playerID, deviceId, name) => {
 };
 
 function getPlayerID() {
-    var playerID = 1;
+    playerID = 1;
     // Find Number of Entries in Name field of DB
     nameFormDB.once("value", (snapshot) => {
         length = snapshot.numChildren();
@@ -60,7 +60,6 @@ function getPlayerID() {
         if(length > 0){
             playerID = namesArray[length-1].playerID + 1;
             console.log(playerID);
-            return playerID;
         }
     });
     return playerID;

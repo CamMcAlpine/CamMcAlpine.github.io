@@ -14,7 +14,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 function submitForm(e) {
-    playerID = getPlayerID();
     name_field = document.getElementById("name");
     e.preventDefault();
     let name = name_field.value;

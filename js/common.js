@@ -19,16 +19,15 @@ function submitForm(e) {
     e.preventDefault();
     let name = name_field.value;
     name_field.value = " ";
-    saveName(playerID, deviceId, name);
+    saveName(deviceId, name);
 }
 
-const saveName = (playerID, deviceId, name) => {
+const saveName = (deviceId, name) => {
     // Generate or retrieve a device ID
     var newNameForm = nameFormDB.push();
     newNameForm.set({
         deviceId: deviceId,
         name: name,
-        playerID: playerID
     });
 };
 
@@ -175,27 +174,28 @@ function clearDatabase() {
     });
 }
 
-function getPlayerID() {
-    playerID = 1;
-    // Find Number of Entries in Name field of DB
-    nameFormDB.once("value", (snapshot) => {
-        length = snapshot.numChildren();
-        const namesArray = [];
-        snapshot.forEach((childSnapshot) => {
-            namesArray.push({
-                key: childSnapshot.key,
-                deviceId: childSnapshot.val().deviceId,
-                name: childSnapshot.val().name,
-                playerID: childSnapshot.val().playerID
-            });
-        });
-        if(length > 0){
-            playerID = namesArray[length-1].playerID + 1;
-            console.log(playerID);
-        }
-    });
-    return playerID;
-}
+// Proll dont need this anymore
+// function getPlayerID() {
+//     playerID = 1;
+//     // Find Number of Entries in Name field of DB
+//     nameFormDB.once("value", (snapshot) => {
+//         length = snapshot.numChildren();
+//         const namesArray = [];
+//         snapshot.forEach((childSnapshot) => {
+//             namesArray.push({
+//                 key: childSnapshot.key,
+//                 deviceId: childSnapshot.val().deviceId,
+//                 name: childSnapshot.val().name,
+//                 playerID: childSnapshot.val().playerID
+//             });
+//         });
+//         if(length > 0){
+//             playerID = namesArray[length-1].playerID + 1;
+//             console.log(playerID);
+//         }
+//     });
+//     return playerID;
+// }
 
 const getElementVal = (id) => {
     return document.getElementById(id).value;

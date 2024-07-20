@@ -78,7 +78,7 @@ function pairNames() {
         for (i = 0; i < lengthOfArray; i += 4) {
             newArray = namesArray.splice(0, 4);
             playersPerCard = 4;
-            console.log(newArray[0].key);
+            console.log(newArray);
 
             if(newArray.length < 4) {
                 playersPerCard = newArray.length;
@@ -86,11 +86,22 @@ function pairNames() {
                 //Add on prev card
                 if(playersPerCard <= 2) {
                     if(prevCard != "") {
+                        cardFormDB.child(prevCard).child("players").once("value", (snapshot) => {
+                            snapshot.forEach((childSnapshot) => {
+                                console.log(childSnapshot.val().key);
+                                newArray.push({
+                                    key: childSnapshot.val().key,
+                                    deviceId: childSnapshot.val().deviceId,
+                                    name: childSnapshot.val().name,
+                                });
+                            });
+                            console.log(newArray);
+                    });
                         for (j = 0; j < playersPerCard; j++) {
                             playerKey = newArray[j].key;
-
-                            cardFormDB.child(prevCard).update({ ['Player ' + (j+5)]: playerKey });
+                            nameFormDB.child(playerKey).update({cardID : prevCard});
                         }
+                        cardFormDB.child(prevCard).update({ players : newArray });
                         cardFormDB.child(prevCard).update({ hole : 2 });
                         break;   
                     }
@@ -101,10 +112,13 @@ function pairNames() {
             newCardForm.set({ hole : 1 });
             prevCard = newCardForm.key;
 
+            // Put each player on card
+            cardFormDB.child(prevCard).update({ players : newArray });
+
+            // Update Card ID's for each player
             for(j = 0; j < playersPerCard; j++) {                
                 playerKey = newArray[j].key;
-                console.log(playerKey);
-                cardFormDB.child(prevCard).update({ ['Player ' + (j+1)]: playerKey });
+                nameFormDB.child(playerKey).update({cardID : prevCard});
             }
         }
 
@@ -113,10 +127,17 @@ function pairNames() {
         isTeamsGeneratedRef.set(true);
 
         // Redirect users to pairing page
-        setTimeout(() => {
-            window.location.href = "pair.html";
-        }, 1000);
+        // setTimeout(() => {
+        //     window.location.href = "pair.html";
+        // }, 1000);
     });
+
+}
+
+function displayPairing() {
+    console.log("HELLO");
+    const pairingDiv = document.getElementById("pairing");
+    pairingDiv.innerText = "Your Team: " + teamMembers.join(", ");;
 }
 
 function shuffleArray(array) {

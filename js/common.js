@@ -148,42 +148,11 @@ function clearDatabaseConfirm() {
 }
 
 function clearDatabase() {
-    // Reference your database
-    var database = firebase.database();
-
-    // Delete all data at the "nameForm" node (clears everything under nameForm)
-    database.ref("nameForm").remove().then(() => {
-        console.log("Name Form cleared successfully!");
-    }).catch((error) => {
-        console.error("Error clearing Name Form:", error);
-    });
-
-    // Delete all data at the "cardForm" node (clears everything under cardForm)
-    database.ref("cardForm").remove().then(() => {
-        console.log("Card Form cleared successfully!");
-    }).catch((error) => {
-        console.error("Error clearing Card Form:", error);
-    });
-
-    // Delete all data at the "teams" node (clears everything under teams)
-    database.ref("teams").remove().then(() => {
-        console.log("Teams cleared successfully!");
-    }).catch((error) => {
-        console.error("Error clearing Teams:", error);
-    });
-
-    // Delete all data at the "cards" node (clears everything under cards)
-    database.ref("cards").remove().then(() => {
-        console.log("Cards cleared successfully!");
-    }).catch((error) => {
-        console.error("Error clearing Cards:", error);
-    });
-
-    // Reset the isTeamsGenerated flag
-    database.ref("isTeamsGenerated").set(false).then(() => {
-        console.log("isTeamsGenerated flag reset successfully!");
-    }).catch((error) => {
-        console.error("Error resetting isTeamsGenerated flag:", error);
+    firebase.database().ref().set({
+        players: null,
+        teams: null,
+        cards: null,
+        isTeamsGenerated: false
     });
 }
 

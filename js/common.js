@@ -19,7 +19,9 @@ function submitForm(e) {
     let name = name_field.value;
     name_field.value = " ";
     saveName(deviceId, name);
-    window.location.href = "list.html";
+    if(window.location.pathname == "/index.html") {
+        window.location.href = "/list.html";   
+    }
 }
 
 const saveName = (deviceId, name) => {

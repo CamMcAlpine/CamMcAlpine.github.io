@@ -72,7 +72,6 @@ function pairNames() {
         var prevCard = "";
         lengthOfArray = namesArray.length;
 
-
         for (i = 0; i < lengthOfArray; i += 4) {
             newArray = namesArray.splice(0, 4);
             playersPerCard = 4;

@@ -10,139 +10,121 @@ const firebaseConfig = {
     measurementId: "G-7P46FJTMD1"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-function submitForm(e) {
-    name_field = document.getElementById("name");
-    e.preventDefault();
-    let name = name_field.value;
-    name_field.value = " ";
-    saveName(deviceId, name);
+const playersDB = firebase.database().ref("players");
+const teamsDB = firebase.database().ref("teams");
+const cardsDB = firebase.database().ref("cards");
+const isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");
+
+// Generate or retrieve a device ID
+let deviceId = localStorage.getItem('deviceId');
+if (!deviceId) {
+    deviceId = 'device-' + Math.random().toString(36).substr(2, 16);
+    localStorage.setItem('deviceId', deviceId);
 }
 
-const saveName = (deviceId, name) => {
-    // Generate or retrieve a device ID
-    var newNameForm = nameFormDB.push();
-    newNameForm.set({
+function submitForm(e) {
+    e.preventDefault();
+    const nameField = document.getElementById("name");
+    const name = nameField.value;
+    nameField.value = "";
+    savePlayer(deviceId, name);
+}
+
+const savePlayer = (deviceId, name) => {
+    const newPlayerRef = playersDB.push();
+    newPlayerRef.set({
         deviceId: deviceId,
         name: name,
+        teamId: null
     });
 };
 
-function pairNames() {
-    const playersPerTeam = 2;
-
-    nameFormDB.once("value", (snapshot) => {
-        const namesArray = [];
+function generateTeams() {
+    playersDB.once("value", (snapshot) => {
+        const players = [];
         snapshot.forEach((childSnapshot) => {
-            namesArray.push({
+            players.push({
                 key: childSnapshot.key,
-                deviceId: childSnapshot.val().deviceId,
                 name: childSnapshot.val().name,
+                deviceId: childSnapshot.val().deviceId
             });
         });
 
-        if(namesArray.length < 2) {
+        if (players.length < 2) {
             alert("Not enough players. Please add more players.");
             return;
         }
-        
-        // Shuffle names
-        shuffledNames = shuffleArray(namesArray);
 
-        // Load Teams
-        for (i = 0; i < namesArray.length; i += playersPerTeam) {
+        shuffleArray(players);
 
-            // If odd number of people, one person is Cali
-            if(i == namesArray.length - 1) {
-                player1Key = namesArray[i].key;
-                nameFormDB.child(player1Key).update({ partnerID: player1Key });
-                break;                
-            }
-            player1Key = namesArray[i].key;
-            player2Key = namesArray[i + 1].key;
-
-            // Put partner ID in player name form
-            nameFormDB.child(player1Key).update({ partnerID: player2Key });
-            nameFormDB.child(player2Key).update({ partnerID: player1Key });
-        }
-
-        // Load Cards
-        var prevCard = "";
-        lengthOfArray = namesArray.length;
-
-        for (i = 0; i < lengthOfArray; i += 4) {
-            newArray = namesArray.splice(0, 4);
-            playersPerCard = 4;
-            console.log(newArray);
-
-            if(newArray.length < 4) {
-                playersPerCard = newArray.length;
-                
-                //Add on prev card
-                if(playersPerCard <= 2) {
-                    if(prevCard != "") {
-                        cardFormDB.child(prevCard).child("players").once("value", (snapshot) => {
-                            snapshot.forEach((childSnapshot) => {
-                                console.log(childSnapshot.val().key);
-                                newArray.push({
-                                    key: childSnapshot.val().key,
-                                    deviceId: childSnapshot.val().deviceId,
-                                    name: childSnapshot.val().name,
-                                });
-                            });
-                            console.log(newArray);
-                    });
-                        for (j = 0; j < playersPerCard; j++) {
-                            playerKey = newArray[j].key;
-                            nameFormDB.child(playerKey).update({cardID : prevCard});
-                        }
-                        cardFormDB.child(prevCard).update({ players : newArray });
-                        cardFormDB.child(prevCard).update({ hole : 2 });
-                        break;   
-                    }
-                }         
-            }
-
-            var newCardForm = cardFormDB.push()
-            newCardForm.set({ hole : 1 });
-            prevCard = newCardForm.key;
-
-            // Put each player on card
-            cardFormDB.child(prevCard).update({ players : newArray });
-
-            // Update Card ID's for each player
-            for(j = 0; j < playersPerCard; j++) {                
-                playerKey = newArray[j].key;
-                nameFormDB.child(playerKey).update({cardID : prevCard});
+        const teams = [];
+        for (let i = 0; i < players.length; i += 2) {
+            if (i === players.length - 1) {
+                teams.push([players[i]]);
+            } else {
+                teams.push([players[i], players[i + 1]]);
             }
         }
 
-        // Update the isTeamsGenerated flag to true
-        const isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");
-        isTeamsGeneratedRef.set(true);
+        teams.forEach((team, index) => {
+            const newTeamRef = teamsDB.push();
+            const teamData = {};
+            team.forEach((player) => {
+                teamData[player.key] = true;
+                playersDB.child(player.key).update({ teamId: newTeamRef.key });
+            });
+            newTeamRef.set({
+                ...teamData,
+                cardId: null
+            });
+        });
+
+        generateCards();
     });
-
 }
 
-function displayPairing() {
-    console.log("HELLO");
-    const pairingDiv = document.getElementById("pairing");
-    pairingDiv.innerText = "Your Team: " + teamMembers.join(", ");;
+function generateCards() {
+    teamsDB.once("value", (snapshot) => {
+        const teams = [];
+        snapshot.forEach((childSnapshot) => {
+            teams.push({
+                key: childSnapshot.key,
+                data: childSnapshot.val()
+            });
+        });
+
+        const cards = [];
+        for (let i = 0; i < teams.length; i += 2) {
+            if (i === teams.length - 1) {
+                cards.push([teams[i]]);
+            } else {
+                cards.push([teams[i], teams[i + 1]]);
+            }
+        }
+
+        cards.forEach((card, index) => {
+            const newCardRef = cardsDB.push();
+            const cardData = {};
+            card.forEach((team) => {
+                cardData[team.key] = true;
+                teamsDB.child(team.key).update({ cardId: newCardRef.key });
+            });
+            newCardRef.set({
+                teams: cardData,
+                hole: index + 1
+            });
+        });
+
+        isTeamsGeneratedRef.set(true);
+    });
 }
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
-    }
-}
-
-function clearDatabaseConfirm() {
-    const confirmation = confirm("Are you sure you want to clear all data from the database? This action cannot be undone.");
-    if (confirmation) {
-        clearDatabase();
     }
 }
 
@@ -153,15 +135,4 @@ function clearDatabase() {
         cards: null,
         isTeamsGenerated: false
     });
-}
-
-const getElementVal = (id) => {
-    return document.getElementById(id).value;
-};
-
-// Generate or retrieve a device ID
-let deviceId = localStorage.getItem('deviceId');
-if (!deviceId) {
-    deviceId = 'device-' + Math.random().toString(36).substr(2, 16);
-    localStorage.setItem('deviceId', deviceId);
 }

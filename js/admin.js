@@ -1,36 +1,24 @@
-// Reference your database
-var nameFormDB = firebase.database().ref("nameForm");
-var cardFormDB = firebase.database().ref("cardForm");
-
-// Fetch and display names in real-time
-nameFormDB.on("value", (snapshot) => {
+document.addEventListener("DOMContentLoaded", function() {
     const playersList = document.getElementById("players-list");
-    playersList.innerHTML = ""; // Clear the list before updating
-    snapshot.forEach((childSnapshot) => {
-        const name = childSnapshot.val().name;
 
-        // Create player Box
-        const playerBox = document.createElement("li");
-        playerBox.classList.add("player-box");
-        playersList.appendChild(playerBox);
-
-        // Create player name
-        const playerName = document.createElement("h4");
-        playerName.classList.add("player");
-        playerName.textContent = name;
-        playerBox.appendChild(playerName);
-
-        // Add Trash Can Icon
-        const deleteIcon = document.createElement("div");
-        deleteIcon.classList.add("material-symbols-outlined");
-        deleteIcon.textContent = "delete";
-        playerBox.appendChild(deleteIcon);
-        deleteIcon.addEventListener("click", () => {
-            nameFormDB.child(childSnapshot.key).remove();
+    // Function to render the list of players
+    function renderPlayers(snapshot) {
+        playersList.innerHTML = "";
+        snapshot.forEach((childSnapshot) => {
+            const player = childSnapshot.val();
+            const li = document.createElement("li");
+            li.textContent = player.name;
+            playersList.appendChild(li);
         });
+    }
+
+    // Listen for changes in the players database
+    playersDB.on("value", (snapshot) => {
+        renderPlayers(snapshot);
+    });
+
+    // Initially load the players list
+    playersDB.once("value", (snapshot) => {
+        renderPlayers(snapshot);
     });
 });
-
-document.getElementById("gen-teams-button").addEventListener("click", pairNames);
-document.getElementById("name_field").addEventListener("submit", submitForm);
-document.getElementById("clear-data-button").addEventListener("click", clearDatabaseConfirm);

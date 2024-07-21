@@ -13,24 +13,26 @@
 </head>
 
 <body>
-    
-    <h2 id="list-title">Player List</h2>
+    <div class="container">
+        <h2 id="list-title">Player List</h2>
 
-    <div class="list-box">
-        <ul id="players-list">
-        </ul>
-        <div class="add_player_box">
-            <form id="name_field">
-                <input type="text" id="name" name="name">
-                <input type="submit" id="add" value="Add" for="name">
-            </form>
+        <div class="list-box">
+            <ul id="players-list"></ul>
+            <div class="add_player_box">
+                <form id="name_form" onsubmit="submitForm(event)">
+                    <input type="text" id="name" name="name" placeholder="Enter player name" required>
+                    <button type="submit" id="add">Add</button>
+                </form>
+            </div>
         </div>
-    </div>
-    <div class="gen-teams-button-box">
-        <button id="gen-teams-button">Generate Teams</button>
-    </div>
-    <div class="clear-data-button-box">
-        <button id="clear-data-button">Clear All Data</button>
+
+        <div class="gen-teams-button-box">
+            <button id="gen-teams-button" onclick="generateTeams()">Generate Teams</button>
+        </div>
+
+        <div class="clear-data-button-box">
+            <button id="clear-data-button" onclick="clearDatabase()">Clear All Data</button>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>

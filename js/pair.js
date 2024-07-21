@@ -18,8 +18,7 @@ var nameFormDB = firebase.database().ref("nameForm");
 var cardFormDB = firebase.database().ref("cardForm");
 
 // // Get the device ID
-// let deviceId = localStorage.getItem('deviceId');
-
+// let deviceId = localStorage.getItem('deviceId');;
 
 nameFormDB.orderByChild("deviceId").equalTo(deviceId).once("value", (snapshot) => {
     const namesArray = [];
@@ -32,44 +31,33 @@ nameFormDB.orderByChild("deviceId").equalTo(deviceId).once("value", (snapshot) =
         });
     });
 
-    // cardFormDB.once("value", (snapshot) => {
-    //     const cardsArray = [];
-    //     snapshot.forEach((childSnapshot) => {
-    //         console.log(childSnapshot.val());
-    //         cardsArray.push({
-    //             player : childSnapshot.val().playerNum
-    //         });
-    //         cardsArray.push({
-    //             hole : childSnapshot.val().hole
-    //         });
-    //     });
-    //     if (cardsArray.length > 0) {
-    //         document.getElementById("card").innerHTML = cardsArray[0].cardId;
-    //     }
-    // });
-
-
     snapshot.forEach((childSnapshot) => {
-        // Display Partner
-        for (i = 1; i < namesArray.length; i++) {
-            if (namesArray[i].key == childSnapshot.val().partnerID) {
-                document.getElementById("pairing").innerHTML = "Your Partner: " + namesArray[i].name;
-            }            
-        };
+        const cardList = document.getElementById("card");
+
+        // Get Partner ID
+        partnerID = childSnapshot.val().partnerID;
+        
+        // Display Partner Name
+        nameFormDB.child(partnerID).once("value", (partnerSnapshot) => {
+            document.getElementById("pairing").innerHTML = partnerSnapshot.val().name;
+        });
 
         // Display Card
         let cardID = childSnapshot.val().cardID;
         cardFormDB.child(cardID).once("value", (cardSnapshot) => {
             players = cardSnapshot.val().players;
             playerNames = [];
+            // Display Card Players
             for(i = 0; i < players.length; i++){
-                playerNames.push(players[i].name);
+                const playerName = document.createElement("li");
+                playerName.classList.add("player-name");
+                playerName.textContent = players[i].name;
+                cardList.appendChild(playerName);
+                // playerNames.push(players[i].name);
             }
-            playerNames = playerNames.toString().split(",").join("\n");
-            console.log(playerNames);
-            document.getElementById("card").innerHTML = playerNames;
+            // document.getElementById("card").innerHTML = playerNames;
             // Display Hole
-            document.getElementById("hole").innerHTML = "Hole: " + cardSnapshot.val().hole;
+            document.getElementById("hole").innerHTML = cardSnapshot.val().hole;
         })
 
     });

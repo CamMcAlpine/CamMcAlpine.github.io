@@ -18,9 +18,12 @@ function submitForm(e) {
     e.preventDefault();
     let name = name_field.value;
     name_field.value = " ";
-    saveName(deviceId, name);
     if(window.location.pathname == "/index.html") {
+        saveName(deviceId, name);
         window.location.href = "/list.html";   
+    }
+    else{
+        saveName(0, name);
     }
 }
 

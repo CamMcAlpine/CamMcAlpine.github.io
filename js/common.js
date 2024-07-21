@@ -32,7 +32,6 @@ const saveName = (deviceId, name) => {
 
 function pairNames() {
     const playersPerTeam = 2;
-    const teamsPerCard = 2;
 
     nameFormDB.once("value", (snapshot) => {
         const namesArray = [];
@@ -49,7 +48,6 @@ function pairNames() {
             return;
         }
         
-
         // Shuffle names
         shuffledNames = shuffleArray(namesArray);
 
@@ -125,11 +123,6 @@ function pairNames() {
         // Update the isTeamsGenerated flag to true
         const isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");
         isTeamsGeneratedRef.set(true);
-
-        // Redirect users to pairing page
-        // setTimeout(() => {
-        //     window.location.href = "pair.html";
-        // }, 1000);
     });
 
 }
@@ -193,29 +186,6 @@ function clearDatabase() {
         console.error("Error resetting isTeamsGenerated flag:", error);
     });
 }
-
-// Proll dont need this anymore
-// function getPlayerID() {
-//     playerID = 1;
-//     // Find Number of Entries in Name field of DB
-//     nameFormDB.once("value", (snapshot) => {
-//         length = snapshot.numChildren();
-//         const namesArray = [];
-//         snapshot.forEach((childSnapshot) => {
-//             namesArray.push({
-//                 key: childSnapshot.key,
-//                 deviceId: childSnapshot.val().deviceId,
-//                 name: childSnapshot.val().name,
-//                 playerID: childSnapshot.val().playerID
-//             });
-//         });
-//         if(length > 0){
-//             playerID = namesArray[length-1].playerID + 1;
-//             console.log(playerID);
-//         }
-//     });
-//     return playerID;
-// }
 
 const getElementVal = (id) => {
     return document.getElementById(id).value;

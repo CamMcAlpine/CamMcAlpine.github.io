@@ -2,6 +2,16 @@
 var nameFormDB = firebase.database().ref("nameForm");
 var cardFormDB = firebase.database().ref("cardForm");
 
+var isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");
+
+// Function to check for team generation flag and redirect
+isTeamsGeneratedRef.on("value", (snapshot) => {
+    const isGenerated = snapshot.val();
+    if (isGenerated && window.location.pathname == "/admin.html") {
+        window.location.href = "adminPair.html";
+    }
+});
+
 // Fetch and display names in real-time
 nameFormDB.on("value", (snapshot) => {
     const playersList = document.getElementById("players-list");

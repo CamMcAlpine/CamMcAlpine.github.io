@@ -32,31 +32,47 @@ nameFormDB.orderByChild("deviceId").equalTo(deviceId).once("value", (snapshot) =
         });
     });
 
-    cardFormDB.once("value", (snapshot) => {
-        const cardsArray = [];
-        snapshot.forEach((childSnapshot) => {
-            console.log(childSnapshot.val());
-            cardsArray.push({
-                player : childSnapshot.val().playerNum
-            });
-            cardsArray.push({
-                hole : childSnapshot.val().hole
-            });
-        });
-        if (cardsArray.length > 0) {
-            document.getElementById("card").innerHTML = cardsArray[0].cardId;
-        }
-    });
+    // cardFormDB.once("value", (snapshot) => {
+    //     const cardsArray = [];
+    //     snapshot.forEach((childSnapshot) => {
+    //         console.log(childSnapshot.val());
+    //         cardsArray.push({
+    //             player : childSnapshot.val().playerNum
+    //         });
+    //         cardsArray.push({
+    //             hole : childSnapshot.val().hole
+    //         });
+    //     });
+    //     if (cardsArray.length > 0) {
+    //         document.getElementById("card").innerHTML = cardsArray[0].cardId;
+    //     }
+    // });
 
-});
 
     snapshot.forEach((childSnapshot) => {
+        // Display Partner
         for (i = 1; i < namesArray.length; i++) {
             if (namesArray[i].key == childSnapshot.val().partnerID) {
-                document.getElementById("pairing").innerHTML = namesArray[i].name;
+                document.getElementById("pairing").innerHTML = "Your Partner: " + namesArray[i].name;
             }            
         };
+
+        // Display Card
         let cardID = childSnapshot.val().cardID;
+        cardFormDB.child(cardID).once("value", (cardSnapshot) => {
+            players = cardSnapshot.val().players;
+            playerNames = [];
+            for(i = 0; i < players.length; i++){
+                playerNames.push(players[i].name);
+            }
+            playerNames = playerNames.toString().split(",").join("\n");
+            console.log(playerNames);
+            document.getElementById("card").innerHTML = playerNames;
+            // Display Hole
+            document.getElementById("hole").innerHTML = "Hole: " + cardSnapshot.val().hole;
+        })
+
+    });
 
 });
 

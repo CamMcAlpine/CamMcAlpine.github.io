@@ -1,0 +1,16 @@
+h1 {
+    text-align: center;
+}
+
+.hole {
+    margin-left: 40px;
+}
+
+.team {
+    margin-left: 40px;
+}
+
+.player {
+    margin-left: 20px;
+    color: rgb(207, 207, 45);
+}

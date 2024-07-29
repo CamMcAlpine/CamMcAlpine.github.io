@@ -3,13 +3,14 @@ h1 {
 }
 
 .hole {
-    margin-left: 20px;
+    margin-left: 40px;
 }
 
 .team {
-    margin-left: 20px;
+    margin-left: 40px;
 }
 
 .player {
     margin-left: 20px;
+    color: rgb(207, 207, 45);
 }

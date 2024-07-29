@@ -76,54 +76,77 @@ function pairNames() {
 
         // Load Cards
         var prevCard = "";
-        lengthOfArray = namesArray.length;
+        lengthOfArray = shuffledNames.length;
 
-        for (i = 0; i < lengthOfArray; i += 4) {
-            newArray = namesArray.splice(0, 4);
-            playersPerCard = 4;
-            console.log(newArray);
 
-            if(newArray.length < 4) {
-                playersPerCard = newArray.length;
-                
-                //Add on prev card
-                if(playersPerCard <= 2) {
-                    if(prevCard != "") {
-                        cardFormDB.child(prevCard).child("players").once("value", (snapshot) => {
-                            snapshot.forEach((childSnapshot) => {
-                                console.log(childSnapshot.val().key);
-                                newArray.push({
-                                    key: childSnapshot.val().key,
-                                    deviceId: childSnapshot.val().deviceId,
-                                    name: childSnapshot.val().name,
-                                });
-                            });
-                            console.log(newArray);
-                    });
-                        for (j = 0; j < playersPerCard; j++) {
-                            playerKey = newArray[j].key;
-                            nameFormDB.child(playerKey).update({cardID : prevCard});
-                        }
-                        cardFormDB.child(prevCard).update({ players : newArray });
-                        cardFormDB.child(prevCard).update({ hole : 2 });
-                        break;   
-                    }
-                }         
+        holeNumber = 0;
+        teamNumber = 0;            
+        for(i = 0; i < lengthOfArray; i++) {
+            if(i % 4 == 0 && lengthOfArray-i > 2) {
+                console.log("Hole " + (holeNumber+1));
+                holeNumber++;
+            }
+            if(i % 2 == 0){
+                console.log("Team " + (teamNumber+1));
+                teamNumber++;
             }
 
-            var newCardForm = cardFormDB.push()
-            newCardForm.set({ hole : 1 });
-            prevCard = newCardForm.key;
+            var teamsForm = teamFormDB.push();
 
-            // Put each player on card
-            cardFormDB.child(prevCard).update({ players : newArray });
-
-            // Update Card ID's for each player
-            for(j = 0; j < playersPerCard; j++) {                
-                playerKey = newArray[j].key;
-                nameFormDB.child(playerKey).update({cardID : prevCard});
-            }
+            teamsForm.set({
+                player_key: shuffledNames[i].key,
+                name: shuffledNames[i].name,
+                team: teamNumber,
+                hole: holeNumber
+            });
         }
+
+
+        // for (i = 0; i < lengthOfArray; i += 4) {
+        //     newArray = namesArray.splice(0, 4);
+        //     playersPerCard = 4;
+
+        //     if(newArray.length < 4) {
+        //         playersPerCard = newArray.length;
+                
+        //         //Add on prev card
+        //         if(playersPerCard <= 2) {
+        //             if(prevCard != "") {
+        //                 cardFormDB.child(prevCard).child("players").once("value", (snapshot) => {
+        //                     snapshot.forEach((childSnapshot) => {
+        //                         console.log(childSnapshot.val().key);
+        //                         newArray.push({
+        //                             key: childSnapshot.val().key,
+        //                             deviceId: childSnapshot.val().deviceId,
+        //                             name: childSnapshot.val().name,
+        //                         });
+        //                     });
+        //                     console.log(newArray);
+        //             });
+        //                 for (j = 0; j < playersPerCard; j++) {
+        //                     playerKey = newArray[j].key;
+        //                     nameFormDB.child(playerKey).update({cardID : prevCard});
+        //                 }
+        //                 cardFormDB.child(prevCard).update({ players : newArray });
+        //                 cardFormDB.child(prevCard).update({ hole : 2 });
+        //                 break;
+        //             }
+        //         }         
+        //     }
+
+        //     var newCardForm = cardFormDB.push()
+        //     newCardForm.set({ hole : 1 });
+        //     prevCard = newCardForm.key;
+
+        //     // Put each player on card
+        //     cardFormDB.child(prevCard).update({ players : newArray });
+
+        //     // Update Card ID's for each player
+        //     for(j = 0; j < playersPerCard; j++) {                
+        //         playerKey = newArray[j].key;
+        //         nameFormDB.child(playerKey).update({cardID : prevCard});
+        //     }
+        // }
 
         // Update the isTeamsGenerated flag to true
         const isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");
@@ -143,6 +166,7 @@ function shuffleArray(array) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
+    return array;
 }
 
 function clearDatabaseConfirm() {

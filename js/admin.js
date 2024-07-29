@@ -1,6 +1,7 @@
 // Reference your database
 var nameFormDB = firebase.database().ref("nameForm");
 var cardFormDB = firebase.database().ref("cardForm");
+var teamFormDB = firebase.database().ref("teamForm");
 
 var isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");
 
@@ -8,7 +9,7 @@ var isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");
 isTeamsGeneratedRef.on("value", (snapshot) => {
     const isGenerated = snapshot.val();
     if (isGenerated && window.location.pathname == "/admin.html") {
-        window.location.href = "adminPair.html";
+        //window.location.href = "adminPair.html";
     }
 });
 

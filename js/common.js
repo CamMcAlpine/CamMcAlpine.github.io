@@ -46,6 +46,7 @@ function pairNames() {
                 key: childSnapshot.key,
                 deviceId: childSnapshot.val().deviceId,
                 name: childSnapshot.val().name,
+                partnerID: childSnapshot.val().partnerID
             });
         });
 
@@ -97,7 +98,8 @@ function pairNames() {
                 player_key: shuffledNames[i].key,
                 name: shuffledNames[i].name,
                 team: teamNumber,
-                hole: holeNumber
+                hole: holeNumber,
+                deviceId: shuffledNames[i].deviceId
             });
         }
 

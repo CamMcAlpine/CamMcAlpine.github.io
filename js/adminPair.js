@@ -17,7 +17,7 @@ teamFormDB.once("value", (snapshot) => {
     holeNumber = 0;
     teamNumber = 0;            
     for(i = 0; i < lengthOfArray; i++) {
-        if(i % 4 == 0 && lengthOfArray-i > 2) {
+        if(i % 4 == 0 && (lengthOfArray-i > 2) || i == 0) {
             holeNumber++;
 
             const card = document.createElement("div");

@@ -9,7 +9,7 @@ var isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");
 isTeamsGeneratedRef.on("value", (snapshot) => {
     const isGenerated = snapshot.val();
     if (isGenerated && window.location.pathname == "/admin.html") {
-        //window.location.href = "adminPair.html";
+        window.location.href = "adminPair.html";
     }
 });
 

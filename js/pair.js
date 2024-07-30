@@ -42,7 +42,7 @@ teamFormDB.orderByChild("deviceId").equalTo(deviceId).once("value", (snapshot) =
         document.getElementById("hole").innerHTML = hole+1;
 
         teamFormDB.orderByChild("hole").equalTo(hole).once("value", (holeSnapshot) => {
-            snapshot.forEach((holeSnapshot) => {
+            holeSnapshot.forEach((childSnapshot) => {
                 var card_player = document.createElement("li");
                 card_player.id = "card_player";
                 card_player.innerHTML = childSnapshot.val().name;
@@ -51,3 +51,4 @@ teamFormDB.orderByChild("deviceId").equalTo(deviceId).once("value", (snapshot) =
         });
     });
 });
+

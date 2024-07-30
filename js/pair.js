@@ -35,28 +35,28 @@ nameFormDB.orderByChild("deviceId").equalTo(deviceId).once("value", (snapshot) =
     });
 
 
-    snapshot.forEach((childSnapshot) => {
-        const cardList = document.getElementById("card");
+    // snapshot.forEach((childSnapshot) => {
+    //     const cardList = document.getElementById("card");
 
-        // Display Card
-        let cardID = childSnapshot.val().cardID;
-        cardFormDB.child(cardID).once("value", (cardSnapshot) => {
-            players = cardSnapshot.val().players;
-            playerNames = [];
-            // Display Card Players
-            for(i = 0; i < players.length; i++){
-                const playerName = document.createElement("li");
-                playerName.classList.add("player-name");
-                playerName.textContent = players[i].name;
-                cardList.appendChild(playerName);
-                // playerNames.push(players[i].name);
-            }
-            // document.getElementById("card").innerHTML = playerNames;
-            // Display Hole
-            document.getElementById("hole").innerHTML = cardSnapshot.val().hole;
-        })
+    //     // Display Card
+    //     let cardID = childSnapshot.val().cardID;
+    //     cardFormDB.child(cardID).once("value", (cardSnapshot) => {
+    //         players = cardSnapshot.val().players;
+    //         playerNames = [];
+    //         // Display Card Players
+    //         for(i = 0; i < players.length; i++){
+    //             const playerName = document.createElement("li");
+    //             playerName.classList.add("player-name");
+    //             playerName.textContent = players[i].name;
+    //             cardList.appendChild(playerName);
+    //             // playerNames.push(players[i].name);
+    //         }
+    //         // document.getElementById("card").innerHTML = playerNames;
+    //         // Display Hole
+    //         document.getElementById("hole").innerHTML = cardSnapshot.val().hole;
+    //     })
 
-    });
+    // });
 
 });
 

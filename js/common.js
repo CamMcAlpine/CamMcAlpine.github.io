@@ -17,8 +17,8 @@ function submitForm(e) {
     name_field = document.getElementById("name");
     e.preventDefault();
     let name = name_field.value;
-    name_field.value = " ";
-    if(window.location.pathname == "/index.html") {
+    console.log(window.location.pathname = "" || window.location.pathname == "/index.html");
+    if(window.location.pathname) {
         saveName(deviceId, name);
         window.location.href = "/list.html";   
     }

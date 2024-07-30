@@ -44,3 +44,5 @@ teamFormDB.once("value", (snapshot) => {
         team.appendChild(player);
     }
 });
+
+document.getElementById("clear-data-button").addEventListener("click", clearDatabaseConfirm);

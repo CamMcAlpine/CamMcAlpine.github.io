@@ -14,3 +14,17 @@ h1 {
     margin-left: 20px;
     color: rgb(207, 207, 45);
 }
+
+.clear-data-button-box {
+    text-align: center;
+}
+
+#clear-data-button {
+    all: unset;
+    padding-inline: 10px;
+    font-size: 1.3em;
+    border-radius: 5px;
+    font-family: Bebas;
+    color: var(--background);
+    background-color: var(--text);
+}

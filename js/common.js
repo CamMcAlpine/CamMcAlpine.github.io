@@ -17,6 +17,7 @@ function submitForm(e) {
     name_field = document.getElementById("name");
     e.preventDefault();
     let name = name_field.value;
+    name_field.value = "";
 
     if(window.location.pathname == "/" || window.location.pathname == "/index.html") {
         saveName(deviceId, name);
@@ -76,7 +77,6 @@ function pairNames() {
         }
 
         // Load Cards
-        var prevCard = "";
         lengthOfArray = shuffledNames.length;
 
 
@@ -103,53 +103,6 @@ function pairNames() {
             });
         }
 
-
-        // for (i = 0; i < lengthOfArray; i += 4) {
-        //     newArray = namesArray.splice(0, 4);
-        //     playersPerCard = 4;
-
-        //     if(newArray.length < 4) {
-        //         playersPerCard = newArray.length;
-                
-        //         //Add on prev card
-        //         if(playersPerCard <= 2) {
-        //             if(prevCard != "") {
-        //                 cardFormDB.child(prevCard).child("players").once("value", (snapshot) => {
-        //                     snapshot.forEach((childSnapshot) => {
-        //                         console.log(childSnapshot.val().key);
-        //                         newArray.push({
-        //                             key: childSnapshot.val().key,
-        //                             deviceId: childSnapshot.val().deviceId,
-        //                             name: childSnapshot.val().name,
-        //                         });
-        //                     });
-        //                     console.log(newArray);
-        //             });
-        //                 for (j = 0; j < playersPerCard; j++) {
-        //                     playerKey = newArray[j].key;
-        //                     nameFormDB.child(playerKey).update({cardID : prevCard});
-        //                 }
-        //                 cardFormDB.child(prevCard).update({ players : newArray });
-        //                 cardFormDB.child(prevCard).update({ hole : 2 });
-        //                 break;
-        //             }
-        //         }         
-        //     }
-
-        //     var newCardForm = cardFormDB.push()
-        //     newCardForm.set({ hole : 1 });
-        //     prevCard = newCardForm.key;
-
-        //     // Put each player on card
-        //     cardFormDB.child(prevCard).update({ players : newArray });
-
-        //     // Update Card ID's for each player
-        //     for(j = 0; j < playersPerCard; j++) {                
-        //         playerKey = newArray[j].key;
-        //         nameFormDB.child(playerKey).update({cardID : prevCard});
-        //     }
-        // }
-
         // Update the isTeamsGenerated flag to true
         const isTeamsGeneratedRef = firebase.database().ref("isTeamsGenerated");
         isTeamsGeneratedRef.set(true);
@@ -158,7 +111,6 @@ function pairNames() {
 }
 
 function displayPairing() {
-    console.log("HELLO");
     const pairingDiv = document.getElementById("pairing");
     pairingDiv.innerText = "Your Team: " + teamMembers.join(", ");;
 }
@@ -175,6 +127,7 @@ function clearDatabaseConfirm() {
     const confirmation = confirm("Are you sure you want to clear all data from the database? This action cannot be undone.");
     if (confirmation) {
         clearDatabase();
+        window.location.reload();
     }
 }
 

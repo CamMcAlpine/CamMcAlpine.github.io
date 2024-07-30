@@ -116,3 +116,18 @@ ul {
   font-family: Bebas;
   color: var(--text);
 }
+
+.clear-data-button-box {
+  margin-block: 10px;
+  text-align: center;
+}
+
+#clear-data-button {
+  all: unset;
+  padding-inline: 10px;
+  font-size: 1.3em;
+  border-radius: 5px;
+  font-family: Bebas;
+  color: var(--background);
+  background-color: var(--text);
+}

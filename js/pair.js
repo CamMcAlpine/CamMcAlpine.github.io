@@ -32,7 +32,9 @@ nameFormDB.orderByChild("deviceId").equalTo(deviceId).once("value", (snapshot) =
         nameFormDB.child(partnerID).once("value", (partnerSnapshot) => {
             document.getElementById("pairing").innerHTML = partnerSnapshot.val().name;
         });
+
     });
+});
 
 
     // snapshot.forEach((childSnapshot) => {
@@ -58,7 +60,6 @@ nameFormDB.orderByChild("deviceId").equalTo(deviceId).once("value", (snapshot) =
 
     // });
 
-});
 
 // nameFormDB.orderByChild("deviceId").equalTo(deviceId).once("value", (snapshot) => {
 //     snapshot.forEach((childSnapshot) => {

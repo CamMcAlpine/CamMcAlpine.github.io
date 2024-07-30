@@ -16,31 +16,27 @@
 // Reference your database
 var nameFormDB = firebase.database().ref("nameForm");
 var cardFormDB = firebase.database().ref("cardForm");
+var teamFormDB = firebase.database().ref("teamForm");
 
 // // Get the device ID
 // let deviceId = localStorage.getItem('deviceId');;
 
 nameFormDB.orderByChild("deviceId").equalTo(deviceId).once("value", (snapshot) => {
-    const namesArray = [];
-    const cardsArray = [];
     snapshot.forEach((childSnapshot) => {
-        namesArray.push({
-            key: childSnapshot.key,
-            deviceId: childSnapshot.val().deviceId,
-            name: childSnapshot.val().name,
-        });
-    });
-
-    snapshot.forEach((childSnapshot) => {
-        const cardList = document.getElementById("card");
+        console.log(childSnapshot.val());
 
         // Get Partner ID
         partnerID = childSnapshot.val().partnerID;
-        
+
         // Display Partner Name
         nameFormDB.child(partnerID).once("value", (partnerSnapshot) => {
             document.getElementById("pairing").innerHTML = partnerSnapshot.val().name;
         });
+    });
+
+
+    snapshot.forEach((childSnapshot) => {
+        const cardList = document.getElementById("card");
 
         // Display Card
         let cardID = childSnapshot.val().cardID;

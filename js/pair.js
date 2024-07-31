@@ -39,7 +39,7 @@ nameFormDB.orderByChild("deviceId").equalTo(deviceId).once("value", (snapshot) =
 teamFormDB.orderByChild("deviceId").equalTo(deviceId).once("value", (snapshot) => {
     snapshot.forEach((childSnapshot) => {
         hole = childSnapshot.val().hole;
-        document.getElementById("hole").innerHTML = hole+1;
+        document.getElementById("hole").innerHTML = hole;
 
         teamFormDB.orderByChild("hole").equalTo(hole).once("value", (holeSnapshot) => {
             holeSnapshot.forEach((childSnapshot) => {

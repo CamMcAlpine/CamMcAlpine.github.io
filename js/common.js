@@ -84,8 +84,12 @@ function pairNames() {
         teamNumber = 0;            
         for(i = 0; i < lengthOfArray; i++) {
             if(i % 4 == 0 && lengthOfArray-i > 2) {
-                console.log("Hole " + (holeNumber+1));
-                holeNumber++;
+                if(lengthOfArray-i <= 6){
+                    holeNumber = 9;
+                }
+                else{
+                    holeNumber++;
+                }
             }
             if(i % 2 == 0){
                 console.log("Team " + (teamNumber+1));

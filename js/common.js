@@ -131,7 +131,7 @@ function clearDatabaseConfirm() {
     const confirmation = confirm("Are you sure you want to clear all data from the database? This action cannot be undone.");
     if (confirmation) {
         clearDatabase();
-        window.location.reload();
+        window.location.href = "/admin.html";
     }
 }
 

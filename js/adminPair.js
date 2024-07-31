@@ -15,10 +15,20 @@ teamFormDB.once("value", (snapshot) => {
     lengthOfArray = playerArray.length;
 
     holeNumber = 0;
-    teamNumber = 0;            
+    teamNumber = 0;         
+    
+    extraPlayers = lengthOfArray % 4;
+    console.log(extraPlayers);
+    
     for(i = 0; i < lengthOfArray; i++) {
         if(i % 4 == 0 && (lengthOfArray-i > 2) || i == 0) {
-            holeNumber++;
+            
+            if(lengthOfArray-i <= 6){
+                holeNumber = 9;
+            }
+            else{
+                holeNumber++;
+            }
 
             const card = document.createElement("div");
             card.id = "Hole" + holeNumber;

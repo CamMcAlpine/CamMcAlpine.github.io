@@ -71,6 +71,12 @@ ul {
   height: 100%;
 } */
 
+.paid-box {
+  display: flex;
+  position: absolute;
+  right: 20%;
+}
+
 /* Delete Icon */
 .material-symbols-outlined {
   right: 10%;

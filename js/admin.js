@@ -31,6 +31,11 @@ nameFormDB.on("value", (snapshot) => {
         playerName.textContent = name;
         playerBox.appendChild(playerName);
 
+        const paidBox = document.createElement("input");
+        paidBox.type = 'checkbox';
+        paidBox.classList.add("paid-box");
+        playerBox.appendChild(paidBox);
+
         // Add Trash Can Icon
         const deleteIcon = document.createElement("div");
         deleteIcon.classList.add("material-symbols-outlined");

@@ -85,7 +85,7 @@ h2 {
     margin-bottom: 10px;
 }
 
-#score-input[type="text"]
+#score-input[type="number"]
 {
     text-align: center;
     padding-inline: 20px;

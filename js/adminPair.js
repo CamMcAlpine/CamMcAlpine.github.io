@@ -45,7 +45,14 @@ teamFormDB.once("value", (snapshot) => {
             team.id = "Team" + teamNumber;
             team.textContent = "Team " + teamNumber;
             card.appendChild(team);
-        }
+
+
+            console.log(snapshot.val());
+            snapshot.forEach((childSnapshot) => {
+                    console.log(teamNumber);
+                    console.log(childSnapshot.val());
+                });
+            }
 
         const team = document.getElementById("Team" + teamNumber);
         const player = document.createElement("div");
@@ -54,5 +61,6 @@ teamFormDB.once("value", (snapshot) => {
         team.appendChild(player);
     }
 });
+
 
 document.getElementById("clear-data-button").addEventListener("click", clearDatabaseConfirm);

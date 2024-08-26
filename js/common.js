@@ -144,6 +144,26 @@ function clearDatabase() {
     });
 }
 
+function submitScore(e) {
+    score_field = document.getElementById("score-input");
+    e.preventDefault();
+    let score = score_field.value;
+    score_field.value = "";
+    
+    uploadScore(score);
+}
+
+function uploadScore(score) {
+    console.log(deviceId);
+    // Loop through all players in teamForm DB
+    nameFormDB.orderByChild("deviceId").equalTo(deviceId).once("value", (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+            nameFormDB.child(childSnapshot.key).update({ score: score });
+            nameFormDB.child(childSnapshot.val().partnerID).update({ score: score });
+        }); 
+    });
+}
+
 const getElementVal = (id) => {
     return document.getElementById(id).value;
 };

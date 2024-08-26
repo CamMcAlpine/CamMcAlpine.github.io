@@ -52,3 +52,4 @@ teamFormDB.orderByChild("deviceId").equalTo(deviceId).once("value", (snapshot) =
     });
 });
 
+document.getElementById("score-submit").addEventListener("click", submitScore);

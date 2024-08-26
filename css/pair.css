@@ -7,6 +7,17 @@
     font-size: 2em;
 }
 
+header {
+    margin-top: 20px;
+    padding: 0px;
+    height: 100px;
+}
+
+h1 {
+    padding: 0px;
+    margin: 0px;
+}
+
 h2 {
     margin: 10px;
     text-decoration: underline;
@@ -56,4 +67,38 @@ h2 {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+#score-input-box {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#score-input {
+    letter-spacing: 1px;
+    width: 50%;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+#score-input[type="text"]
+{
+    text-align: center;
+    padding-inline: 20px;
+    font-size: 2em;
+    font-family: Bebas;
+    color: var(--background);
+}
+
+#score-submit {
+    background-color: var(--text);
+    font-family: Bebas;
+    font-size: 2em;
+    letter-spacing: 1px;;
+    height: 100%;
+    width: 25%;
 }
